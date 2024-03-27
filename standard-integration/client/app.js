@@ -1,5 +1,43 @@
+/*eslint-env browser*/
+
+// Render the PayPal marks
+//window.paypal.Marks().render('#paypal-marks-container');
+// Render the PayPal buttons
+//window.paypal.Buttons().render('#paypal-button-container');
+
+// Listen for changes to the radio buttons
+document.querySelectorAll('input[name=payment-option]')
+  .forEach(function (el) {
+    el.addEventListener('change', function (event) {
+      // If PayPal is selected, show the PayPal button
+      if (event.target.value === 'paypal') {
+        document.body.querySelector('#alternate-button-container')
+          .style.display = 'none';
+        document.body.querySelector('#paypal-button-container')
+          .style.display = 'block';
+      }
+      // If alternate funding is selected, show a different button
+      if (event.target.value === 'alternate') {
+        document.body.querySelector('#alternate-button-container')
+          .style.display = 'block';
+        document.body.querySelector('#paypal-button-container')
+          .style.display = 'none';
+      }
+    });
+  });
+// Hide non-PayPal button by default
+document.body.querySelector('#alternate-button-container')
+  .style.display = 'none';
+
+let fundingSource
+
 window.paypal
   .Buttons({
+    onClick: (data) => {
+      // fundingSource = "venmo"
+      fundingSource = data.fundingSource
+      resultMessage(`Funding Source changed to ${fundingSource}`);
+    },
     async createOrder() {
       try {
         const response = await fetch("/api/orders", {
@@ -13,7 +51,7 @@ window.paypal
             cart: [
               {
                 id: "YOUR_PRODUCT_ID",
-                quantity: "YOUR_PRODUCT_QUANTITY",
+                quantity: "1",
               },
             ],
           }),

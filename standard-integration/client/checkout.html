@@ -3,13 +3,35 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayPal JS SDK Standard Integration</title>
+    <title>PP Mark's Store Checkout</title>
   </head>
   <body>
+    <hr>
+    <p>Marks</p>
+    <label>
+      <input type="radio" name="payment-option" value="paypal" checked>
+      Pay with PayPal
+      <div id="paypal-marks-container"></div>
+    </label>
+    <br>
+    <label>
+      <input type="radio" name="payment-option" value="alternate">
+      Pay with an Alternate
+    </label>
+    <br>
+    <hr>
+    <p>Buttons</p>
     <div id="paypal-button-container"></div>
+    <br>
+    <hr>
+    <p>Alternate Buttons</p>
+    <div id="alternate-button-container">
+      <p>Alternate Button Container</p>
+      <button>Pay with a different method</button>
+    </div>    
     <p id="result-message"></p>
     <!-- Replace the "test" client-id value with your client-id -->
-    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Aa4-Gx9nbV3hSv6qvqYBdr75mCtiTM8n9IK55-g-XVGpgzTEvllOEdco7K1NXqLYESX4KUnYZwhSx0Vp&currency=USD&components=buttons,marks&enable-funding=venmo"></script>
     <script src="app.js"></script>
   </body>
 </html>
